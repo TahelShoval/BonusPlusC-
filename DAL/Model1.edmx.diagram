@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7a8ca7fb4b3f45a185968c4d7c8d40ff" Name="Diagram1">
+        <EntityTypeShape EntityType="BonusPlusDBModel.Address" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonusPlusDBModel.Benefits" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonusPlusDBModel.Employers" Width="1.5" PointX="8" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonusPlusDBModel.Suppliers" Width="1.5" PointX="1.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonusPlusDBModel.SuppliersBenefits" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonusPlusDBModel.Workers" Width="1.5" PointX="3.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonusPlusDBModel.WorkersBenefits" Width="1.5" PointX="6" PointY="3" IsExpanded="true" />
+        <AssociationConnector Association="BonusPlusDBModel.FK__Employers__Addre__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="BonusPlusDBModel.FK__Suppliers__Benef__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="BonusPlusDBModel.FK_SuppliersBenefits_Benefits" ManuallyRouted="false" />
+        <AssociationConnector Association="BonusPlusDBModel.FK_SuppliersBenefits_Benefits1" ManuallyRouted="false" />
+        <AssociationConnector Association="BonusPlusDBModel.FK__Suppliers__Suppl__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="BonusPlusDBModel.FK_SuppliersBenefits_Suppliers" ManuallyRouted="false" />
+        <AssociationConnector Association="BonusPlusDBModel.FK_SuppliersBenefits_Suppliers1" ManuallyRouted="false" />
+        <AssociationConnector Association="BonusPlusDBModel.FK_SuppliersBenefits_Workers" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
