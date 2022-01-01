@@ -19,7 +19,9 @@
             <PropertyRef Name="BenefitID" />
           </Key>
           <Property Name="BenefitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Details" Type="varchar" MaxLength="100" />
+          <Property Name="Details" Type="varchar" MaxLength="200" />
+          <Property Name="Image" Type="varchar" MaxLength="50" />
+          <Property Name="price" Type="int" />
         </EntityType>
         <EntityType Name="Employers">
           <Key>
@@ -39,7 +41,8 @@
             <PropertyRef Name="SupplierID" />
           </Key>
           <Property Name="SupplierID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SupplierName" Type="varchar" MaxLength="20" />
+          <Property Name="SupplierName" Type="varchar" MaxLength="50" />
+          <Property Name="logo" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="SuppliersBenefits">
           <Key>
@@ -48,7 +51,6 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SupplierId" Type="int" />
           <Property Name="BenefitId" Type="int" />
-          <Property Name="Price" Type="int" />
         </EntityType>
         <EntityType Name="Workers">
           <Key>
@@ -69,9 +71,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SupplierID" Type="int" />
-          <Property Name="BenefitID" Type="int" />
-          <Property Name="WorkerID" Type="int" />
+          <Property Name="WorkerID" Type="int" Nullable="false" />
+          <Property Name="SupplierBenefitID" Type="int" />
           <Property Name="BenefitStatus" Type="int" />
           <Property Name="Coupon" Type="varchar" MaxLength="10" />
         </EntityType>
@@ -87,42 +88,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Suppliers__Benef__45F365D3">
-          <End Role="Benefits" Type="Self.Benefits" Multiplicity="0..1" />
-          <End Role="WorkersBenefits" Type="Self.WorkersBenefits" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Benefits">
-              <PropertyRef Name="BenefitID" />
-            </Principal>
-            <Dependent Role="WorkersBenefits">
-              <PropertyRef Name="BenefitID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Suppliers__Suppl__46E78A0C">
-          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
-          <End Role="WorkersBenefits" Type="Self.WorkersBenefits" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Suppliers">
-              <PropertyRef Name="SupplierID" />
-            </Principal>
-            <Dependent Role="WorkersBenefits">
-              <PropertyRef Name="SupplierID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SuppliersBenefits_Benefits">
-          <End Role="Benefits" Type="Self.Benefits" Multiplicity="0..1" />
-          <End Role="WorkersBenefits" Type="Self.WorkersBenefits" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Benefits">
-              <PropertyRef Name="BenefitID" />
-            </Principal>
-            <Dependent Role="WorkersBenefits">
-              <PropertyRef Name="BenefitID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SuppliersBenefits_Benefits1">
           <End Role="Benefits" Type="Self.Benefits" Multiplicity="1" />
           <End Role="SuppliersBenefits" Type="Self.SuppliersBenefits" Multiplicity="0..1" />
@@ -132,18 +97,6 @@
             </Principal>
             <Dependent Role="SuppliersBenefits">
               <PropertyRef Name="ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SuppliersBenefits_Suppliers">
-          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
-          <End Role="WorkersBenefits" Type="Self.WorkersBenefits" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Suppliers">
-              <PropertyRef Name="SupplierID" />
-            </Principal>
-            <Dependent Role="WorkersBenefits">
-              <PropertyRef Name="SupplierID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -159,8 +112,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SuppliersBenefits_Workers">
-          <End Role="Workers" Type="Self.Workers" Multiplicity="0..1" />
+        <Association Name="FK_Workers_Employers">
+          <End Role="Employers" Type="Self.Employers" Multiplicity="0..1" />
+          <End Role="Workers" Type="Self.Workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employers">
+              <PropertyRef Name="EmployerID" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="EmployerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkersBenefits_SuppliersBenefits">
+          <End Role="SuppliersBenefits" Type="Self.SuppliersBenefits" Multiplicity="0..1" />
+          <End Role="WorkersBenefits" Type="Self.WorkersBenefits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SuppliersBenefits">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WorkersBenefits">
+              <PropertyRef Name="SupplierBenefitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkersBenefits_Workers">
+          <End Role="Workers" Type="Self.Workers" Multiplicity="1" />
           <End Role="WorkersBenefits" Type="Self.WorkersBenefits" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Workers">
@@ -183,31 +160,23 @@
             <End Role="Address" EntitySet="Address" />
             <End Role="Employers" EntitySet="Employers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Suppliers__Benef__45F365D3" Association="Self.FK__Suppliers__Benef__45F365D3">
-            <End Role="Benefits" EntitySet="Benefits" />
-            <End Role="WorkersBenefits" EntitySet="WorkersBenefits" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Suppliers__Suppl__46E78A0C" Association="Self.FK__Suppliers__Suppl__46E78A0C">
-            <End Role="Suppliers" EntitySet="Suppliers" />
-            <End Role="WorkersBenefits" EntitySet="WorkersBenefits" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SuppliersBenefits_Benefits" Association="Self.FK_SuppliersBenefits_Benefits">
-            <End Role="Benefits" EntitySet="Benefits" />
-            <End Role="WorkersBenefits" EntitySet="WorkersBenefits" />
-          </AssociationSet>
           <AssociationSet Name="FK_SuppliersBenefits_Benefits1" Association="Self.FK_SuppliersBenefits_Benefits1">
             <End Role="Benefits" EntitySet="Benefits" />
             <End Role="SuppliersBenefits" EntitySet="SuppliersBenefits" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SuppliersBenefits_Suppliers" Association="Self.FK_SuppliersBenefits_Suppliers">
-            <End Role="Suppliers" EntitySet="Suppliers" />
-            <End Role="WorkersBenefits" EntitySet="WorkersBenefits" />
           </AssociationSet>
           <AssociationSet Name="FK_SuppliersBenefits_Suppliers1" Association="Self.FK_SuppliersBenefits_Suppliers1">
             <End Role="Suppliers" EntitySet="Suppliers" />
             <End Role="SuppliersBenefits" EntitySet="SuppliersBenefits" />
           </AssociationSet>
-          <AssociationSet Name="FK_SuppliersBenefits_Workers" Association="Self.FK_SuppliersBenefits_Workers">
+          <AssociationSet Name="FK_Workers_Employers" Association="Self.FK_Workers_Employers">
+            <End Role="Employers" EntitySet="Employers" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkersBenefits_SuppliersBenefits" Association="Self.FK_WorkersBenefits_SuppliersBenefits">
+            <End Role="SuppliersBenefits" EntitySet="SuppliersBenefits" />
+            <End Role="WorkersBenefits" EntitySet="WorkersBenefits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkersBenefits_Workers" Association="Self.FK_WorkersBenefits_Workers">
             <End Role="Workers" EntitySet="Workers" />
             <End Role="WorkersBenefits" EntitySet="WorkersBenefits" />
           </AssociationSet>
@@ -232,9 +201,9 @@
             <PropertyRef Name="BenefitID" />
           </Key>
           <Property Name="BenefitID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Details" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="WorkersBenefits" Relationship="Self.FK__Suppliers__Benef__45F365D3" FromRole="Benefits" ToRole="WorkersBenefits" />
-          <NavigationProperty Name="WorkersBenefits1" Relationship="Self.FK_SuppliersBenefits_Benefits" FromRole="Benefits" ToRole="WorkersBenefits" />
+          <Property Name="Details" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Int32" />
           <NavigationProperty Name="SuppliersBenefits" Relationship="Self.FK_SuppliersBenefits_Benefits1" FromRole="Benefits" ToRole="SuppliersBenefits" />
         </EntityType>
         <EntityType Name="Employers">
@@ -250,15 +219,15 @@
           <Property Name="EmployerUserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="EmployerPassword" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Address" Relationship="Self.FK__Employers__Addre__4222D4EF" FromRole="Employers" ToRole="Address" />
+          <NavigationProperty Name="Workers" Relationship="Self.FK_Workers_Employers" FromRole="Employers" ToRole="Workers" />
         </EntityType>
         <EntityType Name="Suppliers">
           <Key>
             <PropertyRef Name="SupplierID" />
           </Key>
           <Property Name="SupplierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SupplierName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="WorkersBenefits" Relationship="Self.FK__Suppliers__Suppl__46E78A0C" FromRole="Suppliers" ToRole="WorkersBenefits" />
-          <NavigationProperty Name="WorkersBenefits1" Relationship="Self.FK_SuppliersBenefits_Suppliers" FromRole="Suppliers" ToRole="WorkersBenefits" />
+          <Property Name="SupplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="logo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="SuppliersBenefits" Relationship="Self.FK_SuppliersBenefits_Suppliers1" FromRole="Suppliers" ToRole="SuppliersBenefits" />
         </EntityType>
         <EntityType Name="SuppliersBenefits">
@@ -268,9 +237,9 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SupplierId" Type="Int32" />
           <Property Name="BenefitId" Type="Int32" />
-          <Property Name="Price" Type="Int32" />
           <NavigationProperty Name="Benefits" Relationship="Self.FK_SuppliersBenefits_Benefits1" FromRole="SuppliersBenefits" ToRole="Benefits" />
           <NavigationProperty Name="Suppliers" Relationship="Self.FK_SuppliersBenefits_Suppliers1" FromRole="SuppliersBenefits" ToRole="Suppliers" />
+          <NavigationProperty Name="WorkersBenefits" Relationship="Self.FK_WorkersBenefits_SuppliersBenefits" FromRole="SuppliersBenefits" ToRole="WorkersBenefits" />
         </EntityType>
         <EntityType Name="Workers">
           <Key>
@@ -285,23 +254,20 @@
           <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="WorkerUserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="WorkerPassword" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="WorkersBenefits" Relationship="Self.FK_SuppliersBenefits_Workers" FromRole="Workers" ToRole="WorkersBenefits" />
+          <NavigationProperty Name="Employers" Relationship="Self.FK_Workers_Employers" FromRole="Workers" ToRole="Employers" />
+          <NavigationProperty Name="WorkersBenefits" Relationship="Self.FK_WorkersBenefits_Workers" FromRole="Workers" ToRole="WorkersBenefits" />
         </EntityType>
         <EntityType Name="WorkersBenefits">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SupplierID" Type="Int32" />
-          <Property Name="BenefitID" Type="Int32" />
-          <Property Name="WorkerID" Type="Int32" />
+          <Property Name="WorkerID" Type="Int32" Nullable="false" />
+          <Property Name="SupplierBenefitID" Type="Int32" />
           <Property Name="BenefitStatus" Type="Int32" />
           <Property Name="Coupon" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Benefits" Relationship="Self.FK__Suppliers__Benef__45F365D3" FromRole="WorkersBenefits" ToRole="Benefits" />
-          <NavigationProperty Name="Benefits1" Relationship="Self.FK_SuppliersBenefits_Benefits" FromRole="WorkersBenefits" ToRole="Benefits" />
-          <NavigationProperty Name="Suppliers" Relationship="Self.FK__Suppliers__Suppl__46E78A0C" FromRole="WorkersBenefits" ToRole="Suppliers" />
-          <NavigationProperty Name="Suppliers1" Relationship="Self.FK_SuppliersBenefits_Suppliers" FromRole="WorkersBenefits" ToRole="Suppliers" />
-          <NavigationProperty Name="Workers" Relationship="Self.FK_SuppliersBenefits_Workers" FromRole="WorkersBenefits" ToRole="Workers" />
+          <NavigationProperty Name="SuppliersBenefits" Relationship="Self.FK_WorkersBenefits_SuppliersBenefits" FromRole="WorkersBenefits" ToRole="SuppliersBenefits" />
+          <NavigationProperty Name="Workers" Relationship="Self.FK_WorkersBenefits_Workers" FromRole="WorkersBenefits" ToRole="Workers" />
         </EntityType>
         <Association Name="FK__Employers__Addre__4222D4EF">
           <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
@@ -312,30 +278,6 @@
             </Principal>
             <Dependent Role="Employers">
               <PropertyRef Name="AddressID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Suppliers__Benef__45F365D3">
-          <End Role="Benefits" Type="Self.Benefits" Multiplicity="0..1" />
-          <End Role="WorkersBenefits" Type="Self.WorkersBenefits" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Benefits">
-              <PropertyRef Name="BenefitID" />
-            </Principal>
-            <Dependent Role="WorkersBenefits">
-              <PropertyRef Name="BenefitID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SuppliersBenefits_Benefits">
-          <End Role="Benefits" Type="Self.Benefits" Multiplicity="0..1" />
-          <End Role="WorkersBenefits" Type="Self.WorkersBenefits" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Benefits">
-              <PropertyRef Name="BenefitID" />
-            </Principal>
-            <Dependent Role="WorkersBenefits">
-              <PropertyRef Name="BenefitID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -351,27 +293,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Suppliers__Suppl__46E78A0C">
-          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
-          <End Role="WorkersBenefits" Type="Self.WorkersBenefits" Multiplicity="*" />
+        <Association Name="FK_Workers_Employers">
+          <End Role="Employers" Type="Self.Employers" Multiplicity="0..1" />
+          <End Role="Workers" Type="Self.Workers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Suppliers">
-              <PropertyRef Name="SupplierID" />
+            <Principal Role="Employers">
+              <PropertyRef Name="EmployerID" />
             </Principal>
-            <Dependent Role="WorkersBenefits">
-              <PropertyRef Name="SupplierID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SuppliersBenefits_Suppliers">
-          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
-          <End Role="WorkersBenefits" Type="Self.WorkersBenefits" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Suppliers">
-              <PropertyRef Name="SupplierID" />
-            </Principal>
-            <Dependent Role="WorkersBenefits">
-              <PropertyRef Name="SupplierID" />
+            <Dependent Role="Workers">
+              <PropertyRef Name="EmployerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -387,8 +317,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SuppliersBenefits_Workers">
-          <End Role="Workers" Type="Self.Workers" Multiplicity="0..1" />
+        <Association Name="FK_WorkersBenefits_SuppliersBenefits">
+          <End Role="SuppliersBenefits" Type="Self.SuppliersBenefits" Multiplicity="0..1" />
+          <End Role="WorkersBenefits" Type="Self.WorkersBenefits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SuppliersBenefits">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WorkersBenefits">
+              <PropertyRef Name="SupplierBenefitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkersBenefits_Workers">
+          <End Role="Workers" Type="Self.Workers" Multiplicity="1" />
           <End Role="WorkersBenefits" Type="Self.WorkersBenefits" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Workers">
@@ -411,31 +353,23 @@
             <End Role="Address" EntitySet="Address" />
             <End Role="Employers" EntitySet="Employers" />
           </AssociationSet>
-          <AssociationSet Name="FK__Suppliers__Benef__45F365D3" Association="Self.FK__Suppliers__Benef__45F365D3">
-            <End Role="Benefits" EntitySet="Benefits" />
-            <End Role="WorkersBenefits" EntitySet="WorkersBenefits" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SuppliersBenefits_Benefits" Association="Self.FK_SuppliersBenefits_Benefits">
-            <End Role="Benefits" EntitySet="Benefits" />
-            <End Role="WorkersBenefits" EntitySet="WorkersBenefits" />
-          </AssociationSet>
           <AssociationSet Name="FK_SuppliersBenefits_Benefits1" Association="Self.FK_SuppliersBenefits_Benefits1">
             <End Role="Benefits" EntitySet="Benefits" />
             <End Role="SuppliersBenefits" EntitySet="SuppliersBenefits" />
           </AssociationSet>
-          <AssociationSet Name="FK__Suppliers__Suppl__46E78A0C" Association="Self.FK__Suppliers__Suppl__46E78A0C">
-            <End Role="Suppliers" EntitySet="Suppliers" />
-            <End Role="WorkersBenefits" EntitySet="WorkersBenefits" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SuppliersBenefits_Suppliers" Association="Self.FK_SuppliersBenefits_Suppliers">
-            <End Role="Suppliers" EntitySet="Suppliers" />
-            <End Role="WorkersBenefits" EntitySet="WorkersBenefits" />
+          <AssociationSet Name="FK_Workers_Employers" Association="Self.FK_Workers_Employers">
+            <End Role="Employers" EntitySet="Employers" />
+            <End Role="Workers" EntitySet="Workers" />
           </AssociationSet>
           <AssociationSet Name="FK_SuppliersBenefits_Suppliers1" Association="Self.FK_SuppliersBenefits_Suppliers1">
             <End Role="Suppliers" EntitySet="Suppliers" />
             <End Role="SuppliersBenefits" EntitySet="SuppliersBenefits" />
           </AssociationSet>
-          <AssociationSet Name="FK_SuppliersBenefits_Workers" Association="Self.FK_SuppliersBenefits_Workers">
+          <AssociationSet Name="FK_WorkersBenefits_SuppliersBenefits" Association="Self.FK_WorkersBenefits_SuppliersBenefits">
+            <End Role="SuppliersBenefits" EntitySet="SuppliersBenefits" />
+            <End Role="WorkersBenefits" EntitySet="WorkersBenefits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkersBenefits_Workers" Association="Self.FK_WorkersBenefits_Workers">
             <End Role="Workers" EntitySet="Workers" />
             <End Role="WorkersBenefits" EntitySet="WorkersBenefits" />
           </AssociationSet>
@@ -461,6 +395,8 @@
               <MappingFragment StoreEntitySet="Benefits">
                 <ScalarProperty Name="BenefitID" ColumnName="BenefitID" />
                 <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="price" ColumnName="price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -483,6 +419,7 @@
               <MappingFragment StoreEntitySet="Suppliers">
                 <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
                 <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="logo" ColumnName="logo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -492,7 +429,6 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
                 <ScalarProperty Name="BenefitId" ColumnName="BenefitId" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -515,9 +451,8 @@
             <EntityTypeMapping TypeName="BonusPlusDBModel.WorkersBenefits">
               <MappingFragment StoreEntitySet="WorkersBenefits">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
-                <ScalarProperty Name="BenefitID" ColumnName="BenefitID" />
                 <ScalarProperty Name="WorkerID" ColumnName="WorkerID" />
+                <ScalarProperty Name="SupplierBenefitID" ColumnName="SupplierBenefitID" />
                 <ScalarProperty Name="BenefitStatus" ColumnName="BenefitStatus" />
                 <ScalarProperty Name="Coupon" ColumnName="Coupon" />
               </MappingFragment>

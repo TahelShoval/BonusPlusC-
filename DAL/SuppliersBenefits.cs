@@ -14,12 +14,19 @@ namespace DAL
     
     public partial class SuppliersBenefits
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public SuppliersBenefits()
+        {
+            this.WorkersBenefits = new HashSet<WorkersBenefits>();
+        }
+    
         public int ID { get; set; }
         public Nullable<int> SupplierId { get; set; }
         public Nullable<int> BenefitId { get; set; }
-        public Nullable<int> Price { get; set; }
     
         public virtual Benefits Benefits { get; set; }
         public virtual Suppliers Suppliers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WorkersBenefits> WorkersBenefits { get; set; }
     }
 }

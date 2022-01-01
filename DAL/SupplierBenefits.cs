@@ -6,16 +6,13 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class WorkerBenefits
+    public class SupplierBenefits
     {
         public int ID { get; set; }
         public string SupplierName { get; set; }
-        public string Supplierlogo { get; set; }
+        public string SupplierLogo { get; set; }
         public string BenefitDetails { get; set; }
         public string BenefitImage { get; set; }
-        public Nullable<int> WorkerID { get; set; }
-        public Nullable<int> BenefitStatus { get; set; }
-        public string Coupon { get; set; }
-
+        public Nullable<int> Price { get; set; }
     }
 }

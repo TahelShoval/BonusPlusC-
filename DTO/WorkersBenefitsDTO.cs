@@ -9,9 +9,8 @@ namespace DTO
     public class WorkersBenefitsDTO
     {
         public int ID { get; set; }
-        public Nullable<int> SupplierID { get; set; }
-        public Nullable<int> BenefitID { get; set; }
-        public Nullable<int> WorkerID { get; set; }
+        public int WorkerID { get; set; }
+        public Nullable<int> SupplierBenefitID { get; set; }
         public Nullable<int> BenefitStatus { get; set; }
         public string Coupon { get; set; }
     }

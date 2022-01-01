@@ -30,6 +30,7 @@ namespace DAL
         public string WorkerUserName { get; set; }
         public string WorkerPassword { get; set; }
     
+        public virtual Employers Employers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WorkersBenefits> WorkersBenefits { get; set; }
     }

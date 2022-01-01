@@ -24,7 +24,8 @@ namespace DTO.Convert
             SuppliersDTO supplier = new SuppliersDTO()
             {
                 SupplierID = s.SupplierID,
-                SupplierName = s.SupplierName
+                SupplierName = s.SupplierName,
+                logo = s.logo
             };
             return supplier;
         }
@@ -36,7 +37,8 @@ namespace DTO.Convert
                 Suppliers supplier = new Suppliers()
                 {
                     SupplierID = s.SupplierID,
-                    SupplierName = s.SupplierName
+                    SupplierName = s.SupplierName,
+                    logo = s.logo
                 };
                 return supplier;
             }

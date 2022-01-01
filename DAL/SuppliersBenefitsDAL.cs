@@ -20,6 +20,43 @@ namespace DAL
             }
         }
 
+        public static List<SupplierBenefits> GetAllDetailsSuppliersBenefits()
+        {
+            try
+            {
+                List<SupplierBenefits> supplierBenefits = new List<SupplierBenefits>();
+                List<SuppliersBenefits> suppliersBenefits = ManangementEntitiesSingleton.Instance.SuppliersBenefits.ToList();
+                List<Benefits> benefits = BenefitsDAL.GetAllBenefits();
+                List<Suppliers> suppliers = SuppliersDAL.GetAllSuppliers();
+                foreach (var item in suppliersBenefits)
+                {
+                    SupplierBenefits s = new SupplierBenefits();
+                    s.ID = item.ID;
+                    foreach (var item2 in suppliers)
+                        if (item2.SupplierID == item.SupplierId)
+                        {
+                            s.SupplierName = item2.SupplierName;
+                            s.SupplierLogo = item2.logo;
+                        }
+
+                    foreach (var item2 in benefits)
+                        if (item2.BenefitID == item.BenefitId)
+                        {
+                            s.BenefitDetails = item2.Details;
+                            s.BenefitImage = item2.Image;
+                            s.Price = item2.price;
+                        }
+
+                    supplierBenefits.Add(s);
+                }
+                return supplierBenefits;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
         public static SuppliersBenefits GetSuppliersBenefitById(int id)
         {
             try

@@ -24,8 +24,7 @@ namespace DTO.Convert
             WorkersBenefitsDTO WorkersBenefits = new WorkersBenefitsDTO()
             {
                 ID = w.ID,
-                SupplierID = w.SupplierID,
-                BenefitID = w.BenefitID,
+                SupplierBenefitID = w.SupplierBenefitID,
                 WorkerID = w.WorkerID,
                 BenefitStatus = w.BenefitStatus,
                 Coupon = w.Coupon
@@ -40,8 +39,7 @@ namespace DTO.Convert
                 WorkersBenefits WorkersBenefits = new WorkersBenefits()
                 {
                     ID = w.ID,
-                    SupplierID = w.SupplierID,
-                    BenefitID = w.BenefitID,
+                    SupplierBenefitID = w.SupplierBenefitID,
                     WorkerID = w.WorkerID,
                     BenefitStatus = w.BenefitStatus,
                     Coupon = w.Coupon

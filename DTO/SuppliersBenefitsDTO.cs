@@ -11,6 +11,5 @@ namespace DTO
         public int ID { get; set; }
         public Nullable<int> SupplierId { get; set; }
         public Nullable<int> BenefitId { get; set; }
-        public Nullable<int> Price { get; set; }
     }
 }

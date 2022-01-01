@@ -14,6 +14,12 @@ namespace DAL
     
     public partial class Employers
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Employers()
+        {
+            this.Workers = new HashSet<Workers>();
+        }
+    
         public int EmployerID { get; set; }
         public string CompanyName { get; set; }
         public string NameEmployer { get; set; }
@@ -24,5 +30,7 @@ namespace DAL
         public string EmployerPassword { get; set; }
     
         public virtual Address Address { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Workers> Workers { get; set; }
     }
 }

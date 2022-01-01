@@ -26,7 +26,6 @@ namespace DTO.Convert
                 ID = s.ID,
                 SupplierId = s.SupplierId,
                 BenefitId = s.BenefitId,
-                Price = s.Price
             };
             return suppliersBenefits;
         }
@@ -40,7 +39,6 @@ namespace DTO.Convert
                     ID = s.ID,
                     SupplierId = s.SupplierId,
                     BenefitId = s.BenefitId,
-                    Price = s.Price
                 };
                 return suppliersBenefits;
             }

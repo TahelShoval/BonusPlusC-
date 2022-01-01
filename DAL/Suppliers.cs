@@ -17,18 +17,13 @@ namespace DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Suppliers()
         {
-            this.WorkersBenefits = new HashSet<WorkersBenefits>();
-            this.WorkersBenefits1 = new HashSet<WorkersBenefits>();
             this.SuppliersBenefits = new HashSet<SuppliersBenefits>();
         }
     
         public int SupplierID { get; set; }
         public string SupplierName { get; set; }
+        public string logo { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WorkersBenefits> WorkersBenefits { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WorkersBenefits> WorkersBenefits1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SuppliersBenefits> SuppliersBenefits { get; set; }
     }

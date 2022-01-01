@@ -10,5 +10,6 @@ namespace DTO
     {
         public int SupplierID { get; set; }
         public string SupplierName { get; set; }
+        public string logo { get; set; }
     }
 }

@@ -15,6 +15,11 @@ namespace BL
             return DTO.Convert.SuppliersBenefitsConvert.ConvertDalEntityToDto(listSuppliersBenefits);
         }
 
+        public static List<SupplierBenefits> GetAllDetailsSuppliersBenefits()
+        {
+            return SuppliersBenefitsDAL.GetAllDetailsSuppliersBenefits();
+        }
+
         public static DTO.SuppliersBenefitsDTO GetSuppliersBenefitById(int id)
         {
             DAL.SuppliersBenefits suppliersBenefits = DAL.SuppliersBenefitsDAL.GetSuppliersBenefitById(id);

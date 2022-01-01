@@ -38,18 +38,28 @@ namespace DAL
             {
                 List<WorkerBenefits> workerBenefits = new List<WorkerBenefits>();
                 List<WorkersBenefits> WorkersBenefits = ManangementEntitiesSingleton.Instance.WorkersBenefits.Where(w => w.WorkerID == WorkerId).ToList();
+                List<SuppliersBenefits> suppliersBenefits = SuppliersBenefitsDAL.GetAllSuppliersBenefits();
                 List<Benefits> benefits = BenefitsDAL.GetAllBenefits();
                 List<Suppliers> suppliers = SuppliersDAL.GetAllSuppliers();
                 foreach (var item in WorkersBenefits)
                 {
                     WorkerBenefits w = new WorkerBenefits();
                     w.ID = item.ID;
+                    SuppliersBenefits sb = SuppliersBenefitsDAL.GetSuppliersBenefitById((int)item.SupplierBenefitID);
                     foreach (var item2 in suppliers)
-                        if (item2.SupplierID == item.SupplierID)
+                        if (item2.SupplierID == sb.SupplierId)
+                        {
                             w.SupplierName = item2.SupplierName;
+                            w.Supplierlogo = item2.logo;
+                        }
+
                     foreach (var item2 in benefits)
-                        if (item2.BenefitID == item.BenefitID)
-                            w.DetailsBenefit = item2.Details;
+                        if (item2.BenefitID == sb.BenefitId)
+                        {
+                            w.BenefitDetails = item2.Details;
+                            w.BenefitImage = item2.Image;
+                        }
+
                     w.WorkerID = item.WorkerID;
                     w.BenefitStatus = item.BenefitStatus;
                     w.Coupon = item.Coupon;

@@ -10,5 +10,7 @@ namespace DTO
     {
         public int BenefitID { get; set; }
         public string Details { get; set; }
+        public string Image { get; set; }
+        public Nullable<int> price { get; set; }
     }
 }

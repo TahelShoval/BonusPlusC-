@@ -25,6 +25,8 @@ namespace DTO.Convert
             {
                 BenefitID = b.BenefitID,
                 Details = b.Details,
+                Image = b.Image,
+                price = b.price
             };
             return benefit;
         }
@@ -37,6 +39,8 @@ namespace DTO.Convert
                 {
                     BenefitID = b.BenefitID,
                     Details = b.Details,
+                    Image = b.Image,
+                    price = b.price
                 };
                 return benefit;
             }
