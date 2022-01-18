@@ -61,6 +61,10 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="BenefitsDAL.cs" />
+    <Compile Include="Categories.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CategoriesDAL.cs" />
     <Compile Include="Employers.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

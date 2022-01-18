@@ -14,5 +14,7 @@ namespace DAL
         public string BenefitDetails { get; set; }
         public string BenefitImage { get; set; }
         public Nullable<int> Price { get; set; }
+        public Nullable<int> categoryID { get; set; }
+
     }
 }

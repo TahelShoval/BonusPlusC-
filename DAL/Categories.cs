@@ -12,15 +12,18 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class WorkersBenefits
+    public partial class Categories
     {
-        public int ID { get; set; }
-        public int WorkerID { get; set; }
-        public Nullable<int> SupplierBenefitID { get; set; }
-        public Nullable<int> BenefitStatus { get; set; }
-        public Nullable<int> Coupon { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Categories()
+        {
+            this.Suppliers = new HashSet<Suppliers>();
+        }
     
-        public virtual SuppliersBenefits SuppliersBenefits { get; set; }
-        public virtual Workers Workers { get; set; }
+        public int ID { get; set; }
+        public string category { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Suppliers> Suppliers { get; set; }
     }
 }

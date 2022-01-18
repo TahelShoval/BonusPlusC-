@@ -58,10 +58,27 @@ namespace BonusPlus.Controllers
             return BL.WorkersBL.GetWorkerByEmail(email);
         }
 
-        [HttpGet]
+        [HttpDelete]
         [Route("sendEmail/{email}")]
         public void sendEmail(string email)
         {
+            DTO.WorkersDTO worker = GetWorkerByEmail(email);
+
+
+            Random r = new Random();
+            string str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string newPassword = "";
+
+            for (int i = 0; i < 8; i++)
+            {
+                int x = r.Next(str.Length);
+                newPassword += str[x];
+            }
+
+            worker.WorkerPassword = newPassword;
+
+            Put(worker);
+
             email = email.Replace("{}", ".");
             email = email.Replace("[]", "@");
             string smtpAddress = "smtp.gmail.com";
@@ -70,9 +87,11 @@ namespace BonusPlus.Controllers
             string from = "servicebonusplus@gmail.com";
             string password = "Se94Bo75Ps1!";
             string to = email;
-            string subject = "שחזור סיסמא לאתר";
-            string body = "<h2>משתמש/ת יקר/ה</h2> <br>" +
-                "קיבלנו בקשה לאפס את הסיסמא המקושרת לכתובת מייל זו";
+            string subject = " שחזור סיסמא לאתר "+" Bonus Plus  ";
+            string body = "<h2> שלום " + worker.WorkerName + " </h2>" +
+                "<h3>" + "קיבלנו בקשה לאפס את הסיסמא המקושרת לכתובת מייל זו <br><br>" +
+                " להלן סיסמתך החדשה: " + newPassword + "<br><br> " +
+                "בברכה, <br> Bonus Plus" + "</h3>";
             using (MailMessage mail = new MailMessage())
             {
                 mail.From = new MailAddress(from);

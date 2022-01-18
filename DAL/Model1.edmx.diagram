@@ -4,18 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b9f2d5cf440141e5b5766e9ef17918cf" Name="Diagram1">
-        <EntityTypeShape EntityType="BonusPlusDBModel.Address" Width="1.5" PointX="1.5" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonusPlusDBModel.Benefits" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonusPlusDBModel.Employers" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonusPlusDBModel.Suppliers" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonusPlusDBModel.SuppliersBenefits" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonusPlusDBModel.Workers" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="BonusPlusDBModel.WorkersBenefits" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+      <Diagram DiagramId="b4dcb01db4d948a0931e1e291d209281" Name="Diagram1">
+        <EntityTypeShape EntityType="BonusPlusDBModel.Address" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonusPlusDBModel.Benefits" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonusPlusDBModel.Categories" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonusPlusDBModel.Employers" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonusPlusDBModel.Suppliers" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonusPlusDBModel.SuppliersBenefits" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonusPlusDBModel.Workers" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="BonusPlusDBModel.WorkersBenefits" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="BonusPlusDBModel.FK__Employers__Addre__4222D4EF" ManuallyRouted="false" />
         <AssociationConnector Association="BonusPlusDBModel.FK_SuppliersBenefits_Benefits1" ManuallyRouted="false" />
+        <AssociationConnector Association="BonusPlusDBModel.FK_Suppliers_Category" ManuallyRouted="false" />
         <AssociationConnector Association="BonusPlusDBModel.FK_Workers_Employers" ManuallyRouted="false" />
-        <AssociationConnector Association="BonusPlusDBModel.FK_SuppliersBenefits_Suppliers1" ManuallyRouted="false" />
+        <AssociationConnector Association="BonusPlusDBModel.FK_SuppliersBenefits_Suppliers" ManuallyRouted="false" />
         <AssociationConnector Association="BonusPlusDBModel.FK_WorkersBenefits_SuppliersBenefits" ManuallyRouted="false" />
         <AssociationConnector Association="BonusPlusDBModel.FK_WorkersBenefits_Workers" ManuallyRouted="false" />
       </Diagram>

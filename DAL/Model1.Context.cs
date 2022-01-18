@@ -27,6 +27,7 @@ namespace DAL
     
         public virtual DbSet<Address> Address { get; set; }
         public virtual DbSet<Benefits> Benefits { get; set; }
+        public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Employers> Employers { get; set; }
         public virtual DbSet<Suppliers> Suppliers { get; set; }
         public virtual DbSet<SuppliersBenefits> SuppliersBenefits { get; set; }

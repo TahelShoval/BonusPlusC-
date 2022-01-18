@@ -25,7 +25,8 @@ namespace DTO.Convert
             {
                 SupplierID = s.SupplierID,
                 SupplierName = s.SupplierName,
-                logo = s.logo
+                logo = s.logo,
+                categoryID = s.categoryID
             };
             return supplier;
         }
@@ -38,7 +39,8 @@ namespace DTO.Convert
                 {
                     SupplierID = s.SupplierID,
                     SupplierName = s.SupplierName,
-                    logo = s.logo
+                    logo = s.logo,
+                    categoryID = s.categoryID
                 };
                 return supplier;
             }

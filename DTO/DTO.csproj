@@ -43,8 +43,10 @@
   <ItemGroup>
     <Compile Include="AddressDTO.cs" />
     <Compile Include="BenefitsDTO.cs" />
+    <Compile Include="CategoriesDTO.cs" />
     <Compile Include="Convert\AddressConvert.cs" />
     <Compile Include="Convert\BenefitsConvert.cs" />
+    <Compile Include="Convert\CategoriesConvert.cs" />
     <Compile Include="Convert\EmployersConvert.cs" />
     <Compile Include="Convert\SuppliersBenefitsConvert.cs" />
     <Compile Include="Convert\SuppliersConvert.cs" />

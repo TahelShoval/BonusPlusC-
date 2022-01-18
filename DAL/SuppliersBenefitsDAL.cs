@@ -37,6 +37,7 @@ namespace DAL
                         {
                             s.SupplierName = item2.SupplierName;
                             s.SupplierLogo = item2.logo;
+                            s.categoryID = item2.categoryID;
                         }
 
                     foreach (var item2 in benefits)
