@@ -45,6 +45,7 @@ namespace DAL
                 {
                     WorkerBenefits w = new WorkerBenefits();
                     w.ID = item.ID;
+                    w.SupplierBenefitID = item.SupplierBenefitID;
                     SuppliersBenefits sb = SuppliersBenefitsDAL.GetSuppliersBenefitById((int)item.SupplierBenefitID);
                     foreach (var item2 in suppliers)
                         if (item2.SupplierID == sb.SupplierId)

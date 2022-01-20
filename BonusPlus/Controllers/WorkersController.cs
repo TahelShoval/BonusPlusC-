@@ -59,7 +59,7 @@ namespace BonusPlus.Controllers
         }
 
         [HttpDelete]
-        [Route("sendEmail/{email}")]
+        [Route("passwordReset/{email}")]
         public void sendEmail(string email)
         {
             DTO.WorkersDTO worker = GetWorkerByEmail(email);
@@ -87,10 +87,50 @@ namespace BonusPlus.Controllers
             string from = "servicebonusplus@gmail.com";
             string password = "Se94Bo75Ps1!";
             string to = email;
-            string subject = " שחזור סיסמא לאתר "+" Bonus Plus  ";
+            string subject = " שחזור סיסמא לאתר " + " Bonus Plus  ";
             string body = "<h2> שלום " + worker.WorkerName + " </h2>" +
                 "<h3>" + "קיבלנו בקשה לאפס את הסיסמא המקושרת לכתובת מייל זו <br><br>" +
                 " להלן סיסמתך החדשה: " + newPassword + "<br><br> " +
+                "בברכה, <br> Bonus Plus" + "</h3>";
+            using (MailMessage mail = new MailMessage())
+            {
+                mail.From = new MailAddress(from);
+                mail.To.Add(to);
+                mail.Subject = subject;
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+
+                using (SmtpClient smtp = new SmtpClient(smtpAddress, portNumber))
+                {
+                    smtp.Credentials = new NetworkCredential(from, password);
+                    smtp.EnableSsl = enableSSL;
+                    try
+                    {
+                        smtp.Send(mail);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                    }
+                }
+            }
+        }
+
+        [HttpPut]
+        [Route("SendCoupon")]
+        public void SendCoupon(DTO.WorkersBenefitsDTO workerBenefit)
+        {
+            DTO.WorkersDTO worker = GetWorkerById(workerBenefit.WorkerID);
+
+            string smtpAddress = "smtp.gmail.com";
+            int portNumber = 587;
+            bool enableSSL = true;
+            string from = "servicebonusplus@gmail.com";
+            string password = "Se94Bo75Ps1!";
+            string to = worker.Email;
+            string subject = " מימוש הטבה באתר " + " Bonus Plus  ";
+            string body = "<h2> שלום " + worker.WorkerName + " </h2>" +
+                "<h3>" + "להלן קוד ההטבה שבחרת: " + workerBenefit.Coupon + "<br><br>" +
                 "בברכה, <br> Bonus Plus" + "</h3>";
             using (MailMessage mail = new MailMessage())
             {

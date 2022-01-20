@@ -9,6 +9,7 @@ namespace DAL
     public class WorkerBenefits
     {
         public int ID { get; set; }
+        public Nullable<int> SupplierBenefitID { get; set; }
         public string SupplierName { get; set; }
         public string Supplierlogo { get; set; }
         public string BenefitDetails { get; set; }
