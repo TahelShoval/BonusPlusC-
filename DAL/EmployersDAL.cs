@@ -44,6 +44,18 @@ namespace DAL
             }
         }
 
+        public static Employers GetEmployerByEmail(string email)
+        {
+            try
+            {
+                return ManangementEntitiesSingleton.Instance.Employers.Where(e => e.Email == email).ToList()[0];
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
         public static void PostEmployer(Employers employers)
         {
             try

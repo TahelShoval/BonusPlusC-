@@ -26,6 +26,14 @@ namespace BL
             return DTO.Convert.EmployersConvert.ConvertDalEntityToDto(employer);
         }
 
+        public static DTO.EmployersDTO GetEmployerByEmail(string email)
+        {
+            string newEmail = email.Replace("{}", ".");
+            newEmail = newEmail.Replace("[]", "@");
+            DAL.Employers employer = DAL.EmployersDAL.GetEmployerByEmail(newEmail);
+            return DTO.Convert.EmployersConvert.ConvertDalEntityToDto(employer);
+        }
+
         public static void PostEmployer(DTO.EmployersDTO employersDTO)
         {
             DAL.Employers employers = DTO.Convert.EmployersConvert.ConvertDalDtoToEntity(employersDTO);
