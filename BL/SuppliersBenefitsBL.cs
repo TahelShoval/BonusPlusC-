@@ -20,6 +20,11 @@ namespace BL
             return SuppliersBenefitsDAL.GetAllDetailsSuppliersBenefits();
         }
 
+        public static List<SupplierBenefits> GetAllDetailsSuppliersBenefitsByCategotyID(int id)
+        {
+            return SuppliersBenefitsDAL.GetAllDetailsSuppliersBenefitsByCategotyID(id);
+        }
+
         public static DTO.SuppliersBenefitsDTO GetSuppliersBenefitById(int id)
         {
             DAL.SuppliersBenefits suppliersBenefits = DAL.SuppliersBenefitsDAL.GetSuppliersBenefitById(id);

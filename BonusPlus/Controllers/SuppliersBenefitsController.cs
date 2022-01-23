@@ -29,6 +29,14 @@ namespace BonusPlus.Controllers
             return BL.SuppliersBenefitsBL.GetAllDetailsSuppliersBenefits();
         }
 
+        // GET: api/SuppliersBenefits
+        [HttpGet]
+        [Route("GetBenefitsByCategotyID/{id}")]
+        public List<DAL.SupplierBenefits> GetAllDetailsSuppliersBenefitsByCategotyID(int id)
+        {
+            return BL.SuppliersBenefitsBL.GetAllDetailsSuppliersBenefitsByCategotyID(id);
+        }
+
         // GET: api/SuppliersBenefits/5
         [HttpGet]
         [Route("GetSuppliersBenefitById/{id}")]
