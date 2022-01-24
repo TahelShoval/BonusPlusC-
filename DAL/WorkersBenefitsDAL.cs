@@ -85,7 +85,57 @@ namespace DAL
             {
                 Console.WriteLine(e.Message);
             }
+        }
 
+        public static bool AddWorkersBenefits(List<WorkersBenefits> listWB)
+        {
+            try
+            {
+                List<SuppliersBenefits> suppliersBenefits = SuppliersBenefitsDAL.GetAllSuppliersBenefits();
+                foreach (var item in listWB)
+                {
+                    foreach (var sb in suppliersBenefits)
+                    {
+                        if (item.SupplierBenefitID == sb.ID)
+                        {
+                            string couponString = "";
+
+                            if (item.WorkerID / 10 == 0)
+                                couponString = "00" + item.WorkerID.ToString();
+                            else if (item.WorkerID / 100 == 0)
+                                couponString = "0" + item.WorkerID.ToString();
+                            else
+                                couponString = item.WorkerID.ToString();
+
+                            if (sb.SupplierId / 10 == 0)
+                                couponString += "00" + sb.SupplierId.ToString();
+                            else if (sb.SupplierId / 100 == 0)
+                                couponString += "0" + sb.SupplierId.ToString();
+                            else
+                                couponString += sb.SupplierId.ToString();
+
+                            if (sb.BenefitId / 10 == 0)
+                                couponString += "00" + sb.BenefitId.ToString();
+                            else if (sb.BenefitId / 100 == 0)
+                                couponString += "0" + sb.BenefitId.ToString();
+                            else
+                                couponString += sb.BenefitId.ToString();
+
+
+                            item.Coupon = couponString;
+                            break;
+                        }
+                    }
+                    ManangementEntitiesSingleton.Instance.WorkersBenefits.Add(item);
+                    ManangementEntitiesSingleton.Instance.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return false;
         }
 
         public static void PutWorkersBenefit(WorkersBenefits WorkersBenefits)

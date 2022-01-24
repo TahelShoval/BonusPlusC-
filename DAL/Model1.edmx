@@ -82,7 +82,7 @@
           <Property Name="WorkerID" Type="int" Nullable="false" />
           <Property Name="SupplierBenefitID" Type="int" />
           <Property Name="BenefitStatus" Type="int" />
-          <Property Name="Coupon" Type="int" />
+          <Property Name="Coupon" Type="varchar" MaxLength="10" />
         </EntityType>
         <Association Name="FK__Employers__Addre__4222D4EF">
           <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
@@ -300,7 +300,7 @@
           <Property Name="WorkerID" Type="Int32" Nullable="false" />
           <Property Name="SupplierBenefitID" Type="Int32" />
           <Property Name="BenefitStatus" Type="Int32" />
-          <Property Name="Coupon" Type="Int32" />
+          <Property Name="Coupon" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="SuppliersBenefits" Relationship="Self.FK_WorkersBenefits_SuppliersBenefits" FromRole="WorkersBenefits" ToRole="SuppliersBenefits" />
           <NavigationProperty Name="Workers" Relationship="Self.FK_WorkersBenefits_Workers" FromRole="WorkersBenefits" ToRole="Workers" />
         </EntityType>
@@ -388,7 +388,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BonusPlusDBEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="BonusPlusDBEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Address" EntityType="Self.Address" />
           <EntitySet Name="Benefits" EntityType="Self.Benefits" />
           <EntitySet Name="Categories" EntityType="Self.Categories" />
@@ -431,7 +431,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="BonusPlusDBModelStoreContainer" CdmEntityContainer="BonusPlusDBEntities1">
+        <EntityContainerMapping StorageEntityContainer="BonusPlusDBModelStoreContainer" CdmEntityContainer="BonusPlusDBEntities2">
           <EntitySetMapping Name="Address">
             <EntityTypeMapping TypeName="BonusPlusDBModel.Address">
               <MappingFragment StoreEntitySet="Address">

@@ -33,6 +33,17 @@ namespace BL
             DAL.WorkersBenefitsDAL.PostWorkersBenefit(workersBenefits);
         }
 
+        public static bool AddWorkersBenefits(List<DTO.WorkersBenefitsDTO> listWB)
+        {
+            List<WorkersBenefits> newList = new List<WorkersBenefits>();
+            foreach (var item in listWB)
+            {
+                WorkersBenefits workersBenefits = DTO.Convert.WorkersBenefitsConvert.ConvertDalDtoToEntity(item);
+                newList.Add(workersBenefits);
+            }
+            return DAL.WorkersBenefitsDAL.AddWorkersBenefits(newList);
+        }
+
         public static void PutWorkersBenefit(DTO.WorkersBenefitsDTO WorkersBenefitsDTO)
         {
             DAL.WorkersBenefits workersBenefits = DTO.Convert.WorkersBenefitsConvert.ConvertDalDtoToEntity(WorkersBenefitsDTO);

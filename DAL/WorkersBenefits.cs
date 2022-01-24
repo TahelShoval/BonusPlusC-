@@ -18,7 +18,7 @@ namespace DAL
         public int WorkerID { get; set; }
         public Nullable<int> SupplierBenefitID { get; set; }
         public Nullable<int> BenefitStatus { get; set; }
-        public Nullable<int> Coupon { get; set; }
+        public string Coupon { get; set; }
     
         public virtual SuppliersBenefits SuppliersBenefits { get; set; }
         public virtual Workers Workers { get; set; }

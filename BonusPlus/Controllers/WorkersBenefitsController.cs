@@ -45,6 +45,14 @@ namespace BonusPlus.Controllers
             BL.WorkersBenefitsBL.PostWorkersBenefit(workersBenefitsDTO);
         }
 
+        // POST: api/WorkersBenefits/arr
+        [HttpPost]
+        [Route("PostWorkersBenefits")]
+        public bool PostWorkersBenefit(List<DTO.WorkersBenefitsDTO> listWB)
+        {
+            return BL.WorkersBenefitsBL.AddWorkersBenefits(listWB);
+        }
+
         // PUT: api/WorkersBenefits/5
         [HttpPut]
         [Route("PutWorkersBenefit")]

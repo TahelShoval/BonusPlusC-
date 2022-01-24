@@ -16,7 +16,7 @@ namespace DAL
         public string BenefitImage { get; set; }
         public Nullable<int> WorkerID { get; set; }
         public Nullable<int> BenefitStatus { get; set; }
-        public Nullable<int> Coupon { get; set; }
+        public string Coupon { get; set; }
 
     }
 }
