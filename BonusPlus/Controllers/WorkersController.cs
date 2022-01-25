@@ -18,6 +18,8 @@ namespace BonusPlus.Controllers
 
     public class WorkersController : ApiController
     {
+        string ps = "Se94Bo75Ps1!";
+
         // GET: api/Workers
         [HttpGet]
         [Route("GetAllWorkers")]
@@ -66,7 +68,7 @@ namespace BonusPlus.Controllers
 
 
             Random r = new Random();
-            string str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*@!";
             string newPassword = "";
 
             for (int i = 0; i < 8; i++)
@@ -85,7 +87,7 @@ namespace BonusPlus.Controllers
             int portNumber = 587;
             bool enableSSL = true;
             string from = "servicebonusplus@gmail.com";
-            string password = "Se94Bo75Ps1!";
+            string password = ps;
             string to = email;
             string subject = " שחזור סיסמא לאתר " + " Bonus Plus  ";
             string body = "<h2> שלום " + worker.WorkerName + " </h2>" +

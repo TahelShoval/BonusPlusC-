@@ -13,6 +13,8 @@ namespace BonusPlus.Controllers
 
     public class EmployersController : ApiController
     {
+        string ps = "Se94Bo75Ps1!";
+
         // GET: api/Employers
         [HttpGet]
         [Route("GetAllEmployers")]
@@ -32,7 +34,7 @@ namespace BonusPlus.Controllers
         //GET: api/Employers/5
         [HttpGet]
         [Route("GetEmployerByUserName/{userName}")]
-        public DTO.EmployersDTO GetEmployerByUserName(string userName)    
+        public DTO.EmployersDTO GetEmployerByUserName(string userName)
         {
             return BL.EmployersBL.GetEmployerByUserName(userName);
         }
@@ -53,7 +55,7 @@ namespace BonusPlus.Controllers
 
 
             Random r = new Random();
-            string str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*@!";
             string newPassword = "";
 
             for (int i = 0; i < 8; i++)
@@ -72,7 +74,7 @@ namespace BonusPlus.Controllers
             int portNumber = 587;
             bool enableSSL = true;
             string from = "servicebonusplus@gmail.com";
-            string password = "Se94Bo75Ps1!";
+            string password = ps;
             string to = email;
             string subject = " שחזור סיסמא לאתר " + " Bonus Plus  ";
             string body = "<h2> שלום " + employer.CompanyName + " </h2>" +
@@ -105,7 +107,7 @@ namespace BonusPlus.Controllers
 
         //POST: api/Employers
         [HttpPost]
-       [Route("PostEmployer")]
+        [Route("PostEmployer")]
         public void Post(DTO.EmployersDTO employersDTO)
         {
             BL.EmployersBL.PostEmployer(employersDTO);
